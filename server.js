@@ -16,6 +16,13 @@ var port = process.env.PORT || 3000;
 
 app.use(cors());
 
+
+var bodyParser = require("body-parser");
+app.use(
+  bodyParser.urlencoded({extended: false})
+);
+
+
 /** this project needs to parse POST bodies **/
 // you should mount the body-parser here
 
@@ -33,7 +40,7 @@ app.get('/', function(req, res){
 
 app.post('/api/shorturl/new',(req, res)=>{
   console.log(req.body);
-  res.send({'name':req.body.first+' '+req.body.last});
+  res.send({'name':req.body});
 })
 
 
