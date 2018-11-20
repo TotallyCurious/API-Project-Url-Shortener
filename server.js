@@ -34,7 +34,7 @@ app.get('/', function(req, res){
 
 app.post('/api/shorturl/new',(req, res)=>{
   console.log(req.body);
-  res.send({'name':req.body});
+  res.send({'original_url':req.body,short_url:'stub'});
 })
 
 
