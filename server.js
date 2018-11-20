@@ -32,12 +32,6 @@ app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
-  
-// your first API endpoint... 
-// app.get("/api/hello", function (req, res) {
-//   res.json({greeting: 'hello API'});
-// });
-
 app.post('/api/shorturl/new',(req, res)=>{
   console.log(req.body);
   res.send({'name':req.body});
