@@ -33,7 +33,7 @@ app.get('/', function(req, res){
 
 app.post('/api/shorturl/new',(req, res)=>{
   console.log(req.body);
-  return;
+  res.send({'name':req.body.first+' '+req.body.last});
 })
 
 
