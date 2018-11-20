@@ -3,7 +3,7 @@
 var express = require('express');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-
+mongoose.connect(process.env.MONGO_URI,{ useNewUrlParser: true });
 var cors = require('cors');
 
 var app = express();
