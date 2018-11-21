@@ -52,11 +52,12 @@ app.post('/api/shorturl/new',(req, res)=>{
       
       var site = new Website({url:url,short:data.length});
       site.save((err,data)=>{err?console.log(err):console.log(data)});
+      // res.send(data);
+      console.log('data: ',data);
+
     });
   }
-  createNewUrl();
-  
-  res.send({'original_url':req.body.url,short_url:'stub'});
+  res.send('some info here');
 })
 
 
