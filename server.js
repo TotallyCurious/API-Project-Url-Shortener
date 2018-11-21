@@ -21,7 +21,7 @@ var urlSchema = new Schema({
   short: Number,
 });/* = <Your Model> */
 
-var Website = mongoose.model('Person',urlSchema);
+var Website = mongoose.model('Website',urlSchema);
 
 
 
@@ -45,8 +45,13 @@ app.post('/api/shorturl/new',(req, res)=>{
   var url = req.body.url;
   
   var createNewUrl = function(url){
-    Website.find({url:url},(err,data)=>{
-      err?console.log("Error: ",err):console.log("Data: ",data);
+    
+    Website.find({url:true},(err,data)=>{
+      
+      if(err)console.log("Error: ",err);
+      
+      var site = new Website({url:url,short:data.length});
+      site.save((err,data)=>{err?console.log(err):console.log(data)});
     });
   }
   createNewUrl();
