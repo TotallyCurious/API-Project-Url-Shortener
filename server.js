@@ -3,7 +3,6 @@
 var express = require('express');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URI,{ useNewUrlParser: true });
 var cors = require('cors');
 
 var app = express();
@@ -12,9 +11,18 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
-// mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGO_URI,{ useNewUrlParser: true });
 
 app.use(cors());
+
+var Schema = mongoose.Schema;
+var urlSchema = new Schema({
+  url: {type:String ,required:true},
+  short: Number,
+});/* = <Your Model> */
+
+var Website = mongoose.model('Person',urlSchema);
+
 
 
 var bodyParser = require("body-parser");
@@ -33,8 +41,13 @@ app.get('/', function(req, res){
 });
 
 app.post('/api/shorturl/new',(req, res)=>{
-  console.log(req.body);
-  res.send({'original_url':req.body,short_url:'stub'});
+  console.log(req.body.url);
+  var createNewUrl = function(){
+    return;
+  }
+  
+  
+  res.send({'original_url':req.body.url,short_url:'stub'});
 })
 
 
