@@ -42,23 +42,10 @@ app.get('/', function(req, res){
 });
 
 app.post('/api/shorturl/new',(req, res)=>{
-  console.log(req.body.url);
-  var url = req.body.url;
   
-  var createNewUrl = function(url){
-    
-    Website.find({url:'url'},(err,data)=>{
-      
-      if(err)console.log("Error: ",err);
-      
-      var site = new Website({url:url,short:data.length});
-      site.save((err,data)=>{err?console.log(err):console.log(data)});
-      // res.send(data);
-      console.log('data: ',data);
-
-    });
-  }
-  res.send('some info here');
+  Website.find({url:req.body.url});
+  
+  res.send('some info here: '+ req.body.url);
 })
 
 
