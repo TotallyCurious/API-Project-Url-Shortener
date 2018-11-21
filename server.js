@@ -23,7 +23,8 @@ var urlSchema = new Schema({
 
 var Website = mongoose.model('Website',urlSchema);
 
-
+// var a  = new Website({url:'www.here.com',short:0});
+// a.save();
 
 var bodyParser = require("body-parser");
 app.use(
@@ -46,7 +47,7 @@ app.post('/api/shorturl/new',(req, res)=>{
   
   var createNewUrl = function(url){
     
-    Website.find({url:true},(err,data)=>{
+    Website.find({url:'url'},(err,data)=>{
       
       if(err)console.log("Error: ",err);
       
