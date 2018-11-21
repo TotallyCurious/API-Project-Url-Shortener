@@ -42,10 +42,14 @@ app.get('/', function(req, res){
 
 app.post('/api/shorturl/new',(req, res)=>{
   console.log(req.body.url);
-  var createNewUrl = function(){
-    return;
-  }
+  var url = req.body.url;
   
+  var createNewUrl = function(url){
+    Website.find({url:url},(err,data)=>{
+      err?console.log("Error: ",err):console.log("Data: ",data);
+    });
+  }
+  createNewUrl();
   
   res.send({'original_url':req.body.url,short_url:'stub'});
 })
