@@ -45,6 +45,7 @@ app.get('/', function(req, res){
 
 //Creating short urls
 app.post('/api/shorturl/new',(req, res)=>{
+  var urlNumber = 0;
   p(process.cwd());
   //check for existing entry
   Website.find({url:req.body.url},(e,d)=>{
@@ -56,17 +57,18 @@ app.post('/api/shorturl/new',(req, res)=>{
       Website.count((e,d)=>{
         if(e)p(e);
           p(d,process.cwd());
-          var urlNumber = d;
-      });
-      let newSite = Website({url:req.body.url});
-      newSite.save((e,d)=>{
-        if(e)p(e);
-        p(d);
+          urlNumber = d;
+          let newSite = Website({url:req.body.url,short:urlNumber});
+          newSite.save((e,d)=>{
+            if(e)p(e);
+            p(d);
+         });
+
       });
     }
   });
   
-  res.send('some info here: '+ req.body.url);
+  res.send('some info here: '+ req.body.url+', '+urlNumber);
 })
 
 
