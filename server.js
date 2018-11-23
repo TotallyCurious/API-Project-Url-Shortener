@@ -60,13 +60,14 @@ app.post('/api/shorturl/new',(req, res)=>{
         newSite.save((e,d)=>{
           if(e)p(e);
           res.json('some info here: '+ req.body.url+', '+urlNumber);
-          p(d);
+          return p(d);
+          
         });
       });
     }
     //If entry exists
     else{
-      p(d);
+      return p(d);
     }
   });
 })
