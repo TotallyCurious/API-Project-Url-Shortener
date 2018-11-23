@@ -49,7 +49,7 @@ app.post('/api/shorturl/new',(req, res)=>{
   Website.find({url:req.body.url},(e,d)=>{
     if(e)p(e);
     //If no entry,
-    if(d.length===0 && d.short!==0){
+    if(d.length==0 && d.short!==0){
       //add new entry
       //get collection size
       Website.countDocuments((e,d)=>{
@@ -75,9 +75,10 @@ app.get('/api/shorturl/:short',(req,res)=>{
   Website.find({short:req.params.short},(e,d)=>{
     if(e)p(e);
     else{
-      if(d.length===0)res.json({error:'invalid URL'});
+      if(d.length==0)res.json({error:'invalid URL'});
       else{
-        res.redirect('www.google.com');
+        p(d);
+        return res.redirect(d.url);
       }
     }
   });
