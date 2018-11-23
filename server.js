@@ -45,32 +45,31 @@ app.get('/', function(req, res){
 
 //Creating short urls
 app.post('/api/shorturl/new',(req, res)=>{
-  p(process.cwd());
   //check for existing entry
   Website.find({url:req.body.url},(e,d)=>{
     if(e)p(e);
     //If no entry,
-    if(d.length===0 && d.shorl!==0){
+    if(d.length===0 && d.short!==0){
       //add new entry
       //get collection size
-      Website.count((e,d)=>{
+      Website.countDocuments((e,d)=>{
         if(e)p(e);
-          p(d,process.cwd());
-          var urlNumber = d;
-          let newSite = Website({url:req.body.url,short:urlNumber});
-          newSite.save((e,d)=>{
-            if(e)p(e);
-            response(req,res,req.body.url,urlNumber);
-            p(d);
-         });
+        p(d,process.cwd());
+        var urlNumber = d;
+        let newSite = Website({url:req.body.url,short:urlNumber});
+        newSite.save((e,d)=>{
+          if(e)p(e);
+          res.send('some info here: '+ req.body.url+', '+urlNumber);
+          p(d);
+        });
       });
+    }
+    else{
+      p(d);
     }
   });
 })
 
-var response = (res,req,url,short)=>{
-  res.send('some info here: '+ url+', '+short);
-}
 app.listen(port, function () {
   console.log('Node.js listening ...');
 });
