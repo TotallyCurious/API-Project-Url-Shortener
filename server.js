@@ -59,13 +59,23 @@ app.post('/api/shorturl/new',(req, res)=>{
         let newSite = Website({url:req.body.url,short:urlNumber});
         newSite.save((e,d)=>{
           if(e)p(e);
-          res.send('some info here: '+ req.body.url+', '+urlNumber);
+          res.json('some info here: '+ req.body.url+', '+urlNumber);
           p(d);
         });
       });
     }
+    //If entry exists
     else{
       p(d);
+    }
+  });
+})
+
+app.get('/api/shorturl/:short',(req,res)=>{
+  Website.find({short:req.params.short},(e,d)=>{
+    if(e)p(e);
+    else{
+      if(d.length===0)res.json({error:'invalid '})
     }
   });
 })
