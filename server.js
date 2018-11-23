@@ -75,7 +75,10 @@ app.get('/api/shorturl/:short',(req,res)=>{
   Website.find({short:req.params.short},(e,d)=>{
     if(e)p(e);
     else{
-      if(d.length===0)res.json({error:'invalid '})
+      if(d.length===0)res.json({error:'invalid URL'});
+      else{
+        res.redirect(d.url);
+      }
     }
   });
 })
