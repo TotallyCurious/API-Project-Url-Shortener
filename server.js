@@ -35,6 +35,8 @@ app.use(
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
+var p = (val)=>{console.log(val)}
+
 //Accessing short urls
 app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
@@ -44,7 +46,13 @@ app.get('/', function(req, res){
 //Creating short urls
 app.post('/api/shorturl/new',(req, res)=>{
   
-  Website.find({url:req.body.url});
+  Website.find({url:req.body.url},(e,d)=>{
+    if(e)p(e);
+    if(d.length===0){
+      //add new entry
+      let newSite = Website({url:req.body.url})
+    }
+  });
   
   res.send('some info here: '+ req.body.url);
 })
