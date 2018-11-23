@@ -45,7 +45,7 @@ app.get('/', function(req, res){
 
 //Creating short urls
 app.post('/api/shorturl/new',(req, res)=>{
-  p(Website.stats());
+  p(Website.runCommand({ dbStats: 1, scale: 1 }));
   //check for existing entry
   Website.find({url:req.body.url},(e,d)=>{
     if(e)p(e);
