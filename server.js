@@ -45,12 +45,18 @@ app.get('/', function(req, res){
 
 //Creating short urls
 app.post('/api/shorturl/new',(req, res)=>{
-  
+  p(Website.stats());
+  //check for existing entry
   Website.find({url:req.body.url},(e,d)=>{
     if(e)p(e);
+    //If no entry,
     if(d.length===0){
       //add new entry
-      let newSite = Website({url:req.body.url})
+      let newSite = Website({url:req.body.url});
+      newSite.save((e,d)=>{
+        if(e)p(e);
+        p(d);
+      });
     }
   });
   
