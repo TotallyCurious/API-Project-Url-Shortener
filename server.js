@@ -78,8 +78,8 @@ app.get('/api/shorturl/:short',(req,res)=>{
     else{
       if(d.length==0)res.json({error:'invalid URL'});
       else{
-        p(d);
-        return res.redirect(d.url);
+        p(d[0].url);
+        return res.redirect(d[0].url);
       }
     }
   });
