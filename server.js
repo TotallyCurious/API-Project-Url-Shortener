@@ -26,21 +26,22 @@ var Website = mongoose.model('Website',urlSchema);
 // var a  = new Website({url:'www.here.com',short:0});
 // a.save();
 
+/** this project needs to parse POST bodies **/
+// you should mount the body-parser here
 var bodyParser = require("body-parser");
 app.use(
   bodyParser.urlencoded({extended: false})
 );
 
-
-/** this project needs to parse POST bodies **/
-// you should mount the body-parser here
-
 app.use('/public', express.static(process.cwd() + '/public'));
 
+//Accessing short urls
 app.get('/', function(req, res){
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
+
+//Creating short urls
 app.post('/api/shorturl/new',(req, res)=>{
   
   Website.find({url:req.body.url});
