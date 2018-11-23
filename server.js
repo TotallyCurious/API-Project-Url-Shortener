@@ -77,7 +77,7 @@ app.get('/api/shorturl/:short',(req,res)=>{
     else{
       if(d.length===0)res.json({error:'invalid URL'});
       else{
-        res.redirect(d.url);
+        res.redirect('www.google.com');
       }
     }
   });
