@@ -67,6 +67,7 @@ app.post('/api/shorturl/new',(req, res)=>{
     }
     //If entry exists
     else{
+      res.json({url:d[0].url,short:d[0].short});
       return p(d);
     }
   });
