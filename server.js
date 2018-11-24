@@ -23,9 +23,6 @@ var urlSchema = new Schema({
 
 var Website = mongoose.model('Website',urlSchema);
 
-// var a  = new Website({url:'www.here.com',short:0});
-// a.save();
-
 /** this project needs to parse POST bodies **/
 // you should mount the body-parser here
 var bodyParser = require("body-parser");
